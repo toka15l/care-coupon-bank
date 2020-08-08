@@ -18,6 +18,7 @@ class CreateStudentsTable extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->foreignId('teacher_id');
+            $table->bigInteger('coupons')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

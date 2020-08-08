@@ -9,6 +9,7 @@ $factory->define(Student::class, function (Faker $faker) {
     return [
         'first_name' => $faker->firstName,
         'last_name' => $faker->lastName,
-        'teacher_id' => 1
+        'teacher_id' => 1,
+        'coupons' => $faker->numberBetween(0, 20)
     ];
 });

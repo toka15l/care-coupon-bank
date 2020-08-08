@@ -1,0 +1,26 @@
+.coupon-button {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    outline: inherit;
+    .iconify {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+.coupon-button-minus {
+    @extend .coupon-button;
+    .iconify {
+        color: red;
+    }
+}
+
+.coupon-button-plus {
+    @extend .coupon-button;
+    .iconify {
+        color: green;
+    }
+}
