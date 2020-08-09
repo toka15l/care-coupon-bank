@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SpendCoupons;
 use App\Http\Requests\StoreStudent;
 use App\Student;
 use Illuminate\Http\Request;
@@ -40,6 +41,7 @@ class StudentController extends Controller
     {
         $student = new Student($request->validated());
         $student->teacher()->associate(Auth::user());
+        $student->coupons = $request->starting_coupon_balance;
         $student->save();
         return redirect(route('students.index'));
     }
@@ -87,5 +89,33 @@ class StudentController extends Controller
     public function destroy(Student $student)
     {
         //
+    }
+
+    public function decrement(Student $student)
+    {
+        if ($student->coupons > 0) {
+            $student->decrement('coupons');
+        }
+        return redirect(route('students.index'));
+    }
+
+    public function increment(Student $student)
+    {
+        $student->increment('coupons');
+        return redirect(route('students.index'));
+    }
+
+    public function spend(Student $student)
+    {
+        return view('students.spend', compact('student'));
+    }
+
+    public function spendEdit(SpendCoupons $request, Student $student)
+    {
+        if ($student->coupons > $request->coupons_to_spend) {
+            $student->decrement('coupons', $request->coupons_to_spend);
+            return redirect(route('students.index'));
+        }
+        return
     }
 }

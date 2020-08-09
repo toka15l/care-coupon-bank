@@ -21,4 +21,10 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('students', 'StudentController');
+Route::middleware(['auth'])->group(function () {
+    Route::resource('students', 'StudentController');
+    Route::post('/students/decrement/{student}', 'StudentController@decrement')->name('students.decrement');
+    Route::post('/students/increment/{student}', 'StudentController@increment')->name('students.increment');
+    Route::get('/students/spend/{student}', 'StudentController@spend')->name('students.spend');
+    Route::post('/students/spend/{student}', 'StudentController@spendEdit')->name('students.spend.edit');
+});
