@@ -8,6 +8,7 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
 
         <!-- Styles -->
         <style>
@@ -61,6 +62,10 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+
+            svg[data-icon='emojione:growing-heart'] {
+                font-size: 200px;
+            }
         </style>
     </head>
     <body>
@@ -81,19 +86,9 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Care Coupons
                 </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
+                <span class="iconify" data-icon="emojione:growing-heart" data-inline="false"></span>
             </div>
         </div>
     </body>
