@@ -116,6 +116,6 @@ class StudentController extends Controller
             $student->decrement('coupons', $request->coupons_to_spend);
             return redirect(route('students.index'));
         }
-        return
+        // TODO: reload with error if attempting to decrement more coupons than are available
     }
 }
