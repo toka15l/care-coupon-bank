@@ -25,6 +25,27 @@
     }
 }
 
+.coupon-button-edit {
+    @extend .coupon-button;
+    .iconify {
+        color: gray;
+    }
+}
+
 .disabled {
     opacity: 0.3;
+}
+
+.row-fit {
+    width: 1%;
+    white-space: nowrap;
+}
+
+.card {
+    margin-top: 20px;
+}
+
+.student-update-button {
+    width: 120px;
+    margin-left: 10px;
 }

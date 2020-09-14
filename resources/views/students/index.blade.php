@@ -20,25 +20,29 @@
                         </thead>
                         <tbody>
                             @foreach($students as $student)
-                                <tr style="width: 10%">
-                                    <td>{{ $student->first_name }} {{ $student->last_name }}</td>
-                                    <td class="d-flex justify-content-between">
-                                        <form class="d-inline" method="POST" action="{{ route('students.decrement', $student) }}">
-                                            @csrf
-                                            <button type="submit" class="button coupon-button-minus {{ $student->coupons < 1 ? 'disabled' : '' }}" {{ $student->coupons < 1 ? 'disabled' : '' }}>
-                                                <span class="iconify" data-icon="ant-design:minus-circle-filled" data-inline="false"></span>
-                                            </button>
-                                        </form>
-                                        {{ $student->coupons }}
-                                        <form class="d-inline" method="POST" action="{{ route('students.increment', $student) }}">
-                                            @csrf
-                                            <button type="submit" class="button coupon-button-plus">
-                                                <span class="iconify" data-icon="ant-design:plus-circle-filled" data-inline="false"></span>
-                                            </button>
-                                        </form>
-                                    </td>
+                                <tr>
+                                    <td class="align-middle">{{ $student->first_name }} {{ $student->last_name }}</td>
                                     <td>
-                                        <a href="{{ route('students.spend', $student) }}">Spend</a>
+                                        <div class="d-flex justify-content-between">
+                                            <form class="d-inline" method="POST" action="{{ route('students.decrement', $student) }}">
+                                                @csrf
+                                                <button type="submit" class="button coupon-button-minus {{ $student->coupons < 1 ? 'disabled' : '' }}" {{ $student->coupons < 1 ? 'disabled' : '' }}>
+                                                    <span class="iconify" data-icon="ant-design:minus-circle-filled" data-inline="false"></span>
+                                                </button>
+                                            </form>
+                                            {{ $student->coupons }}
+                                            <form class="d-inline" method="POST" action="{{ route('students.increment', $student) }}">
+                                                @csrf
+                                                <button type="submit" class="button coupon-button-plus">
+                                                    <span class="iconify" data-icon="ant-design:plus-circle-filled" data-inline="false"></span>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                    <td class="row-fit">
+                                        <a href="{{ route('students.edit', $student) }}" class="coupon-button-edit">
+                                            <span class="iconify" data-icon="gg:more-o" data-inline="false"></span>
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach

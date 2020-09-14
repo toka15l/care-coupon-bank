@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SpendCoupons;
 use App\Http\Requests\StoreStudent;
+use App\Http\Requests\UpdateCoupons;
 use App\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -65,7 +66,7 @@ class StudentController extends Controller
      */
     public function edit(Student $student)
     {
-        //
+        return view('students.edit', compact('student'));
     }
 
     /**
@@ -88,7 +89,8 @@ class StudentController extends Controller
      */
     public function destroy(Student $student)
     {
-        //
+        $student->delete();
+        return redirect(route('students.index'));
     }
 
     public function decrement(Student $student)
@@ -105,16 +107,18 @@ class StudentController extends Controller
         return redirect(route('students.index'));
     }
 
-    public function spend(Student $student)
+    public function couponsUpdate(UpdateCoupons $request, Student $student)
     {
-        return view('students.spend', compact('student'));
+        $student->coupons = $request->coupon_balance;
+        $student->save();
+        return redirect(route('students.edit', $student));
     }
 
-    public function spendEdit(SpendCoupons $request, Student $student)
+    public function couponsSpend(SpendCoupons $request, Student $student)
     {
         if ($student->coupons > $request->coupons_to_spend) {
             $student->decrement('coupons', $request->coupons_to_spend);
-            return redirect(route('students.index'));
+            return redirect(route('students.edit', $student));
         }
         // TODO: reload with error if attempting to decrement more coupons than are available
     }
