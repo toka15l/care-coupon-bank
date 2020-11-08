@@ -18,7 +18,7 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $students = Auth::user()->students;
+        $students = Student::where('teacher_id', '=', Auth::user()->id)->sortable()->get();
         return view('students.index', compact('students'));
     }
 

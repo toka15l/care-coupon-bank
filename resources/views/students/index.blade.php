@@ -13,8 +13,9 @@
                     <table class="table table-striped">
                         <thead class="thead-dark">
                             <tr>
-                                <th class="col-1" scope="col">Student Number</th>
-                                <th scope="col">Name</th>
+                                <th class="col-1" scope="col">@sortablelink('student_number', 'Student Number')</th>
+                                <th scope="col">@sortablelink('first_name', 'First Name')</th>
+                                <th scope="col">@sortablelink('last_name', 'Last Name')</th>
                                 <th scope="col" class="text-center">Coupons</th>
                                 <th></th>
                             </tr>
@@ -23,7 +24,8 @@
                             @foreach($students as $student)
                                 <tr>
                                     <td class="col-1 text-center align-middle">{{ $student->student_number }}</td>
-                                    <td class="align-middle">{{ $student->first_name }} {{ $student->last_name }}</td>
+                                    <td class="align-middle">{{ $student->first_name }}</td>
+                                    <td class="align-middle">{{ $student->last_name }}</td>
                                     <td>
                                         <div class="d-flex justify-content-between">
                                             <form class="d-inline" method="POST" action="{{ route('students.decrement', $student) }}">
