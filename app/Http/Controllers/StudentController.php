@@ -11,33 +11,25 @@ use Illuminate\Support\Facades\Auth;
 
 class StudentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function index()
+    public function index(Request $request)
     {
-        $students = Student::where('teacher_id', '=', Auth::user()->id)->sortable()->get();
+        if ($request->has('direction')) {
+            $request->session()->put('direction', $request->input('direction'));
+        }
+        if ($request->has('sort')) {
+            $request->session()->put('sort', $request->input('sort'));
+        }
+        $direction = $request->session()->get('direction', 'desc');
+        $sort = $request->session()->get('sort', 'student_number');
+        $students = Student::where('teacher_id', '=', Auth::user()->id)->sortable([$sort => $direction])->get();
         return view('students.index', compact('students'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
     public function create()
     {
         return view('students.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
-     */
     public function store(StoreStudent $request)
     {
         $student = new Student($request->validated());
@@ -47,46 +39,34 @@ class StudentController extends Controller
         return redirect(route('students.index'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Student  $student
-     * @return \Illuminate\Http\Response
-     */
     public function show(Student $student)
     {
-        //
+        dd('show');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Student  $student
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Student $student)
+    public function edit(Request $request, Student $student)
     {
-        return view('students.edit', compact('student'));
+        $direction = $request->session()->get('direction', 'desc');
+        $sort = $request->session()->get('sort', 'student_number');
+        $orderedStudentIDs = Student::where('teacher_id', '=', Auth::user()->id)->sortable([$sort => $direction])->pluck('id');
+        $previousStudentID = null;
+        $nextStudentID = null;
+        $totalStudents = count($orderedStudentIDs);
+        for ($i = 0; $i < $totalStudents; $i++) {
+            if ($orderedStudentIDs[$i] === $student->id) {
+                $previousStudentID = $i > 0 ? $orderedStudentIDs[$i - 1] : null;
+                $nextStudentID = $i < $totalStudents - 1 ? $orderedStudentIDs[$i + 1] : null;
+                break;
+            }
+        }
+        return view('students.edit', compact('student', 'previousStudentID', 'nextStudentID'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Student  $student
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Student $student)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Student  $student
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Student $student)
     {
         $student->delete();

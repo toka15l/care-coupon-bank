@@ -4,7 +4,23 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <h2>{{ $student->first_name }} {{ $student->last_name }}{{ $student->student_number ? ' (' . $student->student_number . ')' : '' }}</h2>
+            <div class="d-flex justify-content-between align-items-center">
+                @if ($previousStudentID)
+                    <a href="{{ route('students.edit', $previousStudentID) }}" class="next-prev">
+                        <span class="iconify" data-icon="carbon:previous-filled" data-inline="false"></span>
+                    </a>
+                @else
+                    <div></div>
+                @endif
+                <h2>{{ $student->first_name }} {{ $student->last_name }}{{ $student->student_number ? ' (' . $student->student_number . ')' : '' }}</h2>
+                @if ($nextStudentID)
+                    <a href="{{ route('students.edit', $nextStudentID) }}" class="next-prev">
+                        <span class="iconify" data-icon="carbon:next-filled" data-inline="false"></span>
+                    </a>
+                @else
+                    <div></div>
+                @endif
+            </div>
             <div class="card">
                 <div class="card-header">Coupons</div>
                 <div class="card-body">

@@ -49,3 +49,10 @@
     width: 120px;
     margin-left: 10px;
 }
+
+.next-prev {
+    @extend .coupon-button;
+    .iconify {
+        color: $blue;
+    }
+}
