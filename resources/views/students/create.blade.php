@@ -10,6 +10,10 @@
                     <form method="POST" action="{{ route('students.store') }}">
                         @csrf
                         <div class="form-group">
+                            <label for="student-number">Student Number</label>
+                            <input id="student-number" type="text" class="form-control" placeholder="Student Number" name="student_number" required>
+                        </div>
+                        <div class="form-group">
                             <label for="first-name">First Name</label>
                             <input id="first-name" type="text" class="form-control" placeholder="First Name" name="first_name" required>
                         </div>

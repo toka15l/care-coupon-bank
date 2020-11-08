@@ -13,3 +13,8 @@ $factory->define(Student::class, function (Faker $faker) {
         'coupons' => $faker->numberBetween(0, 20)
     ];
 });
+
+$factory->afterCreating(Student::class, function ($student, Faker $faker) {
+    $student->student_number = $student->id;
+    $student->save();
+});

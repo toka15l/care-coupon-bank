@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <h2>{{ $student->first_name }} {{ $student->last_name }}</h2>
+            <h2>{{ $student->first_name }} {{ $student->last_name }}{{ $student->student_number ? ' (' . $student->student_number . ')' : '' }}</h2>
             <div class="card">
                 <div class="card-header">Coupons</div>
                 <div class="card-body">

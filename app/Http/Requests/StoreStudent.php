@@ -24,6 +24,7 @@ class StoreStudent extends FormRequest
     public function rules()
     {
         return [
+            'student_number' => 'sometimes|nullable|int|max:255',
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'starting_coupon_balance' => 'required|integer'

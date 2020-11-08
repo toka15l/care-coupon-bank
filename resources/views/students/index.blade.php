@@ -13,6 +13,7 @@
                     <table class="table table-striped">
                         <thead class="thead-dark">
                             <tr>
+                                <th class="col-1" scope="col">Student Number</th>
                                 <th scope="col">Name</th>
                                 <th scope="col" class="text-center">Coupons</th>
                                 <th></th>
@@ -21,6 +22,7 @@
                         <tbody>
                             @foreach($students as $student)
                                 <tr>
+                                    <td class="col-1 text-center align-middle">{{ $student->student_number }}</td>
                                     <td class="align-middle">{{ $student->first_name }} {{ $student->last_name }}</td>
                                     <td>
                                         <div class="d-flex justify-content-between">
