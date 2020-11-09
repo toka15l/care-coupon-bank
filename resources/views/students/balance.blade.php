@@ -57,7 +57,12 @@
                     <form method="POST" action="{{ route('students.delete', $student) }}">
                         @csrf
                         @method('delete')
-                        <button type="submit" class="btn btn-danger">Delete Student</button>
+                        <div class="d-flex justify-content-between">
+                            <button type="submit" class="btn btn-danger">Delete Student</button>
+                            <a href="{{ route('students.edit', $student) }}" class="btn btn-primary">
+                                Edit Student
+                            </a>
+                        </div>
                     </form>
                 </div>
             </div>

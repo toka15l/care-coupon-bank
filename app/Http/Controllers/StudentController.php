@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SpendCoupons;
-use App\Http\Requests\StoreStudent;
+use App\Http\Requests\StoreUpdateStudent;
 use App\Http\Requests\UpdateCoupons;
 use App\Student;
 use Illuminate\Http\Request;
@@ -27,21 +27,21 @@ class StudentController extends Controller
 
     public function create()
     {
-        return view('students.create');
+        return view('students.create_edit');
     }
 
-    public function store(StoreStudent $request)
+    public function edit(Student $student)
+    {
+        return view('students.create_edit', compact('student'));
+    }
+
+    public function store(StoreUpdateStudent $request)
     {
         $student = new Student($request->validated());
         $student->teacher()->associate(Auth::user());
-        $student->coupons = $request->starting_coupon_balance;
+        $student->coupons = $request->coupon_balance;
         $student->save();
         return redirect(route('students.index'));
-    }
-
-    public function show(Student $student)
-    {
-        dd('show');
     }
 
     public function balance(Request $request, Student $student)
@@ -62,9 +62,12 @@ class StudentController extends Controller
         return view('students.balance', compact('student', 'previousStudentID', 'nextStudentID'));
     }
 
-    public function update(Request $request, Student $student)
+    public function update(StoreUpdateStudent $request, Student $student)
     {
-        //
+        $student->update($request->validated());
+        $student->coupons = $request->coupon_balance;
+        $student->save();
+        return redirect(route('students.balance', $student));
     }
 
     public function destroy(Student $student)

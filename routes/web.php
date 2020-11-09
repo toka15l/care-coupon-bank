@@ -20,7 +20,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::middleware(['auth'])->group(function () {
-    Route::resource('students', 'StudentController');
+    Route::resource('students', 'StudentController')->except('show');
     Route::post('/students/decrement/{student}', 'StudentController@decrement')->name('students.decrement');
     Route::post('/students/increment/{student}', 'StudentController@increment')->name('students.increment');
     Route::get('/students/{student}/balance', 'StudentController@balance')->name('students.balance');
