@@ -39,12 +39,22 @@
                             </div>
                         </div>
                     </form>
+                    <form method="POST" action="{{ route('students.coupons.earn', $student) }}">
+                        @csrf
+                        <div class="form-group mt-3">
+                            <label for="coupons-to-earn">Earn Coupons</label>
+                            <div class="d-flex justify-content-between">
+                                <input id="coupons-to-earn" type="number" class="form-control" placeholder="Coupons to Earn" name="coupons" required>
+                                <button type="submit" class="btn btn-primary student-update-button">Earn</button>
+                            </div>
+                        </div>
+                    </form>
                     <form method="POST" action="{{ route('students.coupons.spend', $student) }}">
                         @csrf
                         <div class="form-group mt-3">
                             <label for="coupons-to-spend">Spend Coupons</label>
                             <div class="d-flex justify-content-between">
-                                <input id="coupons-to-spend" type="number" class="form-control" placeholder="Coupons to Spend" name="coupons_to_spend" required>
+                                <input id="coupons-to-spend" type="number" class="form-control" placeholder="Coupons to Spend" name="coupons" required>
                                 <button type="submit" class="btn btn-primary student-update-button">Spend</button>
                             </div>
                         </div>

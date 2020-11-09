@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\SpendCoupons;
+use App\Http\Requests\EarnSpendCoupons;
 use App\Http\Requests\StoreUpdateStudent;
 use App\Http\Requests\UpdateCoupons;
 use App\Student;
@@ -97,10 +97,16 @@ class StudentController extends Controller
         return redirect(route('students.balance', $student));
     }
 
-    public function couponsSpend(SpendCoupons $request, Student $student)
+    public function couponsEarn(EarnSpendCoupons $request, Student $student)
     {
-        if ($student->coupons > $request->coupons_to_spend) {
-            $student->decrement('coupons', $request->coupons_to_spend);
+        $student->increment('coupons', $request->coupons);
+        return redirect(route('students.balance', $student));
+    }
+
+    public function couponsSpend(EarnSpendCoupons $request, Student $student)
+    {
+        if ($student->coupons > $request->coupons) {
+            $student->decrement('coupons', $request->coupons);
             return redirect(route('students.balance', $student));
         }
         // TODO: reload with error if attempting to decrement more coupons than are available

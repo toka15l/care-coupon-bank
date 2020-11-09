@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SpendCoupons extends FormRequest
+class EarnSpendCoupons extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,7 @@ class SpendCoupons extends FormRequest
     public function rules()
     {
         return [
-            'coupons_to_spend' => 'required|integer'
+            'coupons' => 'required|integer'
         ];
     }
 }

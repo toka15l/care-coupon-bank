@@ -25,6 +25,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/students/increment/{student}', 'StudentController@increment')->name('students.increment');
     Route::get('/students/{student}/balance', 'StudentController@balance')->name('students.balance');
     Route::post('/students/coupons/update/{student}', 'StudentController@couponsUpdate')->name('students.coupons.update');
+    Route::post('/students/coupons/earn/{student}', 'StudentController@couponsEarn')->name('students.coupons.earn');
     Route::post('/students/coupons/spend/{student}', 'StudentController@couponsSpend')->name('students.coupons.spend');
     Route::delete('/students/{student}', 'StudentController@destroy')->name('students.delete');
 });
