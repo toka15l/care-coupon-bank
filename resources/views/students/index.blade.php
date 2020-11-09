@@ -44,7 +44,7 @@
                                         </div>
                                     </td>
                                     <td class="row-fit">
-                                        <a href="{{ route('students.edit', $student) }}" class="coupon-button-edit">
+                                        <a href="{{ route('students.balance', $student) }}" class="coupon-button-edit">
                                             <span class="iconify" data-icon="gg:more-o" data-inline="false"></span>
                                         </a>
                                     </td>

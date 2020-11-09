@@ -10,7 +10,7 @@
             </a>
             <div class="d-flex justify-content-between align-items-center">
                 @if ($previousStudentID)
-                    <a href="{{ route('students.edit', $previousStudentID) }}" class="next-prev">
+                    <a href="{{ route('students.balance', $previousStudentID) }}" class="next-prev">
                         <span class="iconify" data-icon="carbon:previous-filled" data-inline="false"></span>
                     </a>
                 @else
@@ -18,7 +18,7 @@
                 @endif
                 <h2>{{ $student->first_name }} {{ $student->last_name }}{{ $student->student_number ? ' (' . $student->student_number . ')' : '' }}</h2>
                 @if ($nextStudentID)
-                    <a href="{{ route('students.edit', $nextStudentID) }}" class="next-prev">
+                    <a href="{{ route('students.balance', $nextStudentID) }}" class="next-prev">
                         <span class="iconify" data-icon="carbon:next-filled" data-inline="false"></span>
                     </a>
                 @else

@@ -44,7 +44,7 @@ class StudentController extends Controller
         dd('show');
     }
 
-    public function edit(Request $request, Student $student)
+    public function balance(Request $request, Student $student)
     {
         $direction = $request->session()->get('direction', 'desc');
         $sort = $request->session()->get('sort', 'student_number');
@@ -59,7 +59,7 @@ class StudentController extends Controller
                 break;
             }
         }
-        return view('students.edit', compact('student', 'previousStudentID', 'nextStudentID'));
+        return view('students.balance', compact('student', 'previousStudentID', 'nextStudentID'));
     }
 
     public function update(Request $request, Student $student)
@@ -91,14 +91,14 @@ class StudentController extends Controller
     {
         $student->coupons = $request->coupon_balance;
         $student->save();
-        return redirect(route('students.edit', $student));
+        return redirect(route('students.balance', $student));
     }
 
     public function couponsSpend(SpendCoupons $request, Student $student)
     {
         if ($student->coupons > $request->coupons_to_spend) {
             $student->decrement('coupons', $request->coupons_to_spend);
-            return redirect(route('students.edit', $student));
+            return redirect(route('students.balance', $student));
         }
         // TODO: reload with error if attempting to decrement more coupons than are available
     }
