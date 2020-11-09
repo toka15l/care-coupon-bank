@@ -56,3 +56,14 @@
         color: $blue;
     }
 }
+
+.back-btn {
+    position: relative;
+    left: -10px;
+    font-size: 22px;
+    .iconify {
+        color: $blue;
+        width: 35px;
+        height: 35px;
+    }
+}

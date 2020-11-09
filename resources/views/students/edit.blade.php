@@ -3,7 +3,11 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <span class="col-md-8">
+            <a href="{{ route('students.index') }}" class="d-flex back-btn mb-4">
+                <span class="iconify" data-icon="eva:arrow-ios-back-fill" data-inline="false"></span>
+                <span>back</span>
+            </a>
             <div class="d-flex justify-content-between align-items-center">
                 @if ($previousStudentID)
                     <a href="{{ route('students.edit', $previousStudentID) }}" class="next-prev">
